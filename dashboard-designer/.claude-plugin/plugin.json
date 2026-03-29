@@ -1,0 +1,12 @@
+{
+  "name": "dashboard-designer",
+  "description": "BI驾驶舱设计全流程Plugin。从需求分析到汇总层数据模型设计，再到原型和高保真UI。支持多风格输出、图片输入、外部设计工具对接(Figma/墨刀等)。",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com"
+  },
+  "repository": "https://github.com/yourname/dashboard-designer",
+  "keywords": ["BI", "dashboard", "prototype", "design", "Figma", "驾驶舱", "看板"],
+  "license": "MIT"
+}

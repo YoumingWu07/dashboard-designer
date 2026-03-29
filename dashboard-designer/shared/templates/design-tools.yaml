@@ -1,0 +1,49 @@
+# 外部设计工具配置模板
+# 复制此文件到 input/external/design-tools.yaml 并填写实际配置
+
+tools:
+  # ==================== Figma 配置 ====================
+  - name: Figma
+    vendor: Figma Inc.
+    type: design
+    enabled: true
+    description: 团队主要设计工具
+    auth:
+      type: token
+      token: ${FIGMA_TOKEN}
+    projects:
+      - name: 示例项目
+        project_id: ""
+        file_key: ""
+        link: ""
+
+  # ==================== 墨刀 配置 ====================
+  - name: 墨刀
+    vendor: Modao.cc
+    type: prototype
+    enabled: false
+    description: 原型设计工具
+    auth:
+      type: token
+      token: ${MODAO_TOKEN}
+    api_base: "https://api.modao.cc/v1"
+    projects:
+      - name: 示例项目
+        project_id: ""
+        link: ""
+
+  # ==================== 蓝湖 配置 ====================
+  - name: 蓝湖
+    vendor: Lanhuapp.com
+    type: design
+    enabled: false
+    description: 设计协作平台
+    auth:
+      type: password
+      username: ${LANHU_USERNAME}
+      password: ${LANHU_PASSWORD}
+    api_base: "https://lanhuapp.com/api/v1"
+    projects:
+      - name: 示例项目
+        project_id: ""
+        link: ""
