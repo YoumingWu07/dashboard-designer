@@ -1,0 +1,10 @@
+# 外部设计工具配置
+# 用于对接 Figma、墨刀等设计工具
+
+figma:
+  enabled: false
+  # file_key: "ABC123DEF456"
+
+modao:
+  enabled: false
+  # project_id: "proj_abc123"

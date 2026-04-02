@@ -1,7 +1,7 @@
 ---
 name: ui-design-engine
 description: 基于原型生成高保真UI代码。支持多种预设风格和开发者自定义风格。可对接Figma/墨刀等外部设计工具。
-version: 1.0.0
+version: 2.0.0
 user-invocable: true
 ---
 
@@ -9,10 +9,19 @@ user-invocable: true
 
 你是高保真UI设计专家，负责将原型转化为精美的UI代码。
 
+## 路径变量说明
+
+| 变量 | 说明 |
+|------|------|
+| `${workspace}` | 工作目录根路径 |
+| `${project}` | 当前项目目录 |
+| `${input}` | 输入目录 = ${project}/input |
+| `${output}` | 输出目录 = ${project}/output |
+
 ## 输入来源
 
-1. 本地原型: `output/{项目名称}/02_原型设计/`
-2. 外部设计工具: `input/external/design-tools.yaml` 配置的Figma/墨刀等
+1. 本地原型: `${output}/02_原型设计/`
+2. 外部设计工具: `${input}/external.yaml` 配置的Figma/墨刀等
 3. 用户直接提供的原型描述
 
 ## 风格选择
@@ -79,17 +88,17 @@ user-invocable: true
 
 ### 步骤4: 输出UI代码
 
-输出到: `output/{项目名称}/03_UI设计/ui-code/{页面名称}_{风格名称}.html`
+输出到: `${output}/03_UI设计/ui-code/{页面名称}_{风格名称}.html`
 
 ### 步骤5: 打开预览
 
-执行 `open output/{项目名称}/03_UI设计/ui-code/{页面名称}_{风格名称}.html`
+执行 `open ${output}/03_UI设计/ui-code/{页面名称}_{风格名称}.html`
 
 ## 外部设计工具对接
 
 ### Figma
 
-1. 读取 `input/external/design-tools.yaml` 获取Figma配置
+1. 读取 `${input}/external.yaml` 获取Figma配置
 2. 通过Figma MCP获取设计稿
 3. 解析设计稿结构
 4. 生成对应UI代码

@@ -1,13 +1,24 @@
 ---
 name: requirement-analyzer
 description: 分析BI/驾驶舱需求文档或图片，输出功能设计文档和汇总层数据模型设计。支持PDF/Word/Excel/TXT格式及图片输入。
-version: 1.0.0
+version: 2.0.0
 user-invocable: true
 ---
 
 # 需求理解引擎
 
 你是BI驾驶舱需求分析专家，负责解析需求并输出结构化设计文档。
+
+## 路径变量说明
+
+| 变量 | 说明 |
+|------|------|
+| `${workspace}` | 工作目录根路径 |
+| `${project}` | 当前项目目录 |
+| `${input}` | 输入目录 = ${project}/input |
+| `${output}` | 输出目录 = ${project}/output |
+| `${documents}` | 需求文档目录 = ${project}/input/documents |
+| `${images}` | 图片目录 = ${project}/input/images |
 
 ## 输入处理
 
@@ -71,7 +82,7 @@ user-invocable: true
 
 ### 功能设计文档 (Markdown)
 
-输出到: `output/{项目名称}/01_需求分析/功能设计文档.md`
+输出到: `${output}/01_需求分析/功能设计文档.md`
 
 内容结构：
 
@@ -106,12 +117,12 @@ user-invocable: true
 
 ### 数据模型设计 (Excel)
 
-输出到: `output/{项目名称}/01_需求分析/数据模型设计.xlsx`
+输出到: `${output}/01_需求分析/数据模型设计.xlsx`
 
 执行命令生成：
 
 ```bash
-python scripts/excel_generator.py --project "{项目名称}" --output "output/{项目名称}/01_需求分析/"
+python scripts/excel_generator.py --project "{项目名称}" --output "${output}/01_需求分析/"
 ```
 
 Excel包含7个Sheet：
@@ -138,7 +149,7 @@ Excel包含7个Sheet：
 ### 输入: 需求文档
 
 ```
-用户上传: 销售驾驶舱需求说明书.docx
+用户上传: ${documents}/销售驾驶舱需求说明书.docx
 ```
 
 ### 执行步骤
@@ -154,7 +165,7 @@ Excel包含7个Sheet：
 ### 输出
 
 ```
-output/销售驾驶舱/01_需求分析/
+${output}/01_需求分析/
 ├── 功能设计文档.md
 └── 数据模型设计.xlsx
 ```

@@ -1,7 +1,7 @@
 ---
 name: prototype-generator
 description: 基于功能设计生成BI看板原型。输出ASCII线框图和HTML原型。包含KPI卡片、图表、表格等看板组件。
-version: 1.0.0
+version: 2.0.0
 user-invocable: true
 ---
 
@@ -9,10 +9,19 @@ user-invocable: true
 
 你是BI看板原型设计专家，负责将功能设计转化为可视化原型。
 
+## 路径变量说明
+
+| 变量 | 说明 |
+|------|------|
+| `${workspace}` | 工作目录根路径 |
+| `${project}` | 当前项目目录 |
+| `${input}` | 输入目录 = ${project}/input |
+| `${output}` | 输出目录 = ${project}/output |
+
 ## 输入来源
 
-1. 功能设计文档路径: `output/{项目名称}/01_需求分析/功能设计文档.md`
-2. 数据模型设计路径: `output/{项目名称}/01_需求分析/数据模型设计.xlsx`
+1. 功能设计文档路径: `${output}/01_需求分析/功能设计文档.md`
+2. 数据模型设计路径: `${output}/01_需求分析/数据模型设计.xlsx`
 3. 或用户直接描述的需求
 
 ## 生成流程
@@ -29,7 +38,7 @@ user-invocable: true
 
 参考 `templates/ascii-wireframe.md` 模板，生成ASCII线框图。
 
-**输出到**: `output/{项目名称}/02_原型设计/ascii/{页面名称}.txt`
+**输出到**: `${output}/02_原型设计/ascii/{页面名称}.txt`
 
 **ASCII字符说明**:
 
@@ -54,7 +63,7 @@ user-invocable: true
 
 参考 `templates/html-dashboard.md` 模板，生成HTML原型。
 
-**输出到**: `output/{项目名称}/02_原型设计/html/{页面名称}.html`
+**输出到**: `${output}/02_原型设计/html/{页面名称}.html`
 
 **HTML原型要求**:
 
@@ -69,7 +78,7 @@ user-invocable: true
 执行命令在浏览器中预览：
 
 ```bash
-open output/{项目名称}/02_原型设计/html/{页面名称}.html
+open ${output}/02_原型设计/html/{页面名称}.html
 ```
 
 ## 组件库参考

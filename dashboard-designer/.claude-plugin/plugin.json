@@ -1,12 +1,57 @@
 {
   "name": "dashboard-designer",
   "description": "BI驾驶舱设计全流程Plugin。从需求分析到汇总层数据模型设计，再到原型和高保真UI。支持多风格输出、图片输入、外部设计工具对接(Figma/墨刀等)。",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": {
     "name": "Your Name",
     "email": "your@email.com"
   },
   "repository": "https://github.com/yourname/dashboard-designer",
   "keywords": ["BI", "dashboard", "prototype", "design", "Figma", "驾驶舱", "看板"],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "check_script": "shared/scripts/dependency_checker.py",
+    "requirements": "shared/scripts/requirements.txt",
+    "packages": {
+      "python-docx": {
+        "version": ">=0.8.11",
+        "description": "Word文档解析",
+        "required_for": ["requirement-analyzer"]
+      },
+      "openpyxl": {
+        "version": ">=3.1.2",
+        "description": "Excel文件生成",
+        "required_for": ["requirement-analyzer"]
+      },
+      "PyPDF2": {
+        "version": ">=3.0.0",
+        "description": "PDF文档解析",
+        "required_for": ["requirement-analyzer"]
+      },
+      "pyyaml": {
+        "version": ">=6.0",
+        "description": "YAML配置解析",
+        "required_for": ["config_manager"]
+      }
+    }
+  },
+  "config": {
+    "workspace": {
+      "config_file": "workspace.yaml",
+      "env_var": "DASHBOARD_WORKSPACE"
+    },
+    "paths": {
+      "projects_dir": "projects",
+      "input_dir": "input",
+      "output_dir": "output",
+      "documents_dir": "input/documents",
+      "images_dir": "input/images"
+    },
+    "output_subdirs": [
+      "01_需求分析",
+      "02_原型设计/ascii",
+      "02_原型设计/html",
+      "03_UI设计/ui-code"
+    ]
+  }
 }

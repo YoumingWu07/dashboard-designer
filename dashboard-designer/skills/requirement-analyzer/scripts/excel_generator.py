@@ -1,6 +1,10 @@
 """
 数据模型Excel生成脚本
 生成包含7个Sheet的数据模型设计Excel文件
+
+支持两种模式:
+1. 传统模式: --project 项目名称 --output 输出目录
+2. 工作空间模式: --workspace 工作目录 --project 项目名称
 """
 
 import sys
@@ -10,6 +14,12 @@ from datetime import datetime
 
 # 添加共享脚本路径
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'shared' / 'scripts'))
+
+try:
+    from config_manager import ConfigManager
+    HAS_CONFIG_MANAGER = True
+except ImportError:
+    HAS_CONFIG_MANAGER = False
 
 try:
     from openpyxl import Workbook
@@ -193,10 +203,24 @@ def generate_data_model_excel(project_name: str, output_path: str, data: dict = 
 def main():
     parser = argparse.ArgumentParser(description='数据模型Excel生成工具')
     parser.add_argument('--project', '-p', required=True, help='项目名称')
-    parser.add_argument('--output', '-o', default='output', help='输出目录路径')
+    parser.add_argument('--output', '-o', help='输出目录路径（传统模式）')
+    parser.add_argument('--workspace', '-w', help='工作目录路径（工作空间模式）')
     parser.add_argument('--data', '-d', help='数据JSON文件路径（可选）')
 
     args = parser.parse_args()
+
+    # 确定输出目录
+    if args.workspace and HAS_CONFIG_MANAGER:
+        # 工作空间模式
+        config = ConfigManager(args.workspace)
+        paths = config.get_project_paths(args.project)
+        output_path = str(paths["output"]) + "/01_需求分析"
+    elif args.output:
+        # 传统模式
+        output_path = args.output
+    else:
+        # 默认输出到 output/{项目名称}/01_需求分析
+        output_path = f"output/{args.project}/01_需求分析"
 
     # 加载数据（如果有）
     data = {}
@@ -206,7 +230,7 @@ def main():
             data = json.load(f)
 
     # 生成Excel
-    file_path = generate_data_model_excel(args.project, args.output, data)
+    file_path = generate_data_model_excel(args.project, output_path, data)
     print(f"Excel文件已生成: {file_path}")
 
 
